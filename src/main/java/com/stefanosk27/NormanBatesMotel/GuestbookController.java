@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import com.stefanosk27.NormanBatesMotel.Guestbook;
 import com.stefanosk27.NormanBatesMotel.GuestbookService;
 
@@ -37,6 +38,9 @@ public class GuestbookController {
 	
 //	GuestbookService guestbookService = new GuestbookService();  
 	
+	@Autowired
+	InternalResourceViewResolver internalResourceViewResolver;
+	
 	@RequestMapping(value = "/getAllComments", method = RequestMethod.GET, headers = "Accept=application/json")
 	public String getGuestbook(Model model) {
 
@@ -49,11 +53,14 @@ public class GuestbookController {
 	}
 
 	@RequestMapping(value = "/getComment/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
+	//@ResponseBody
 	public Guestbook getCountryById(@PathVariable int id) { 
 		return guestbookService.getComment(id);
 	}
 
+
 	@RequestMapping(value = "/addComment", method = RequestMethod.POST, headers = "Accept=application/json")
+//	@ResponseBody
 	public String addComment(@ModelAttribute("guestbook") Guestbook guestbook) {	
 		if(guestbook.getId()==0)
 		{
@@ -64,14 +71,18 @@ public class GuestbookController {
 			guestbookService.updateComment(guestbook);
 		}
 		
-		return "redirect:/getAllComments#guestbook";
+//		return "redirect:/getAllComments#guestbook";
+		return "redirect:/getAllComments";
+//		return "redirect:jsp/guestbookPage";
+//		return "http://localhost:8080/getAllComments";
+//		return "/getAllComments";
 	}
 
 	@RequestMapping(value = "/updateComment/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
 	public String updateComment(@PathVariable("id") int id,Model model) {
 		 model.addAttribute("guestbook", this.guestbookService.getComment(id));
 	        model.addAttribute("allComments", this.guestbookService.getAllComments());
-	        return "guestbookPage";
+	        return "jsp/guestbookPage";
 	}
 
 	@RequestMapping(value = "/deleteComment/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
