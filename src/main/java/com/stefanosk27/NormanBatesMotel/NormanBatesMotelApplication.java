@@ -16,40 +16,37 @@ import java.net.URISyntaxException;
 
 @SpringBootApplication
 @Configuration
-public class NormanBatesMotelApplication /*extends SpringBootServletInitializer*//* extends WebMvcConfigurerAdapter*/ {
+public class NormanBatesMotelApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(NormanBatesMotelApplication.class, args);
-		
-		 String url = "http://localhost:8080/getAllComments";
+  public static void main(String[] args) {
+    SpringApplication.run(NormanBatesMotelApplication.class, args);
 
-	        if(Desktop.isDesktopSupported()){
-	            Desktop desktop = Desktop.getDesktop();
-	            try {
-	                desktop.browse(new URI(url));
-	            } catch (IOException | URISyntaxException e) {
-	                // TODO Auto-generated catch block
-	                e.printStackTrace();
-	            }
-	        }else{
-	            Runtime runtime = Runtime.getRuntime();
-	            try {
-	                runtime.exec("rundll32 url.dll,FileProtocolHandler " + url);
-	            } catch (IOException e) {
-	                // TODO Auto-generated catch block
-	                e.printStackTrace();
-	            }
-	        }
+    String url = "http://localhost:8080/getAllComments";
+
+    if (Desktop.isDesktopSupported()) {
+      Desktop desktop = Desktop.getDesktop();
+      try {
+        desktop.browse(new URI(url));
+      } catch (IOException | URISyntaxException e) {
+        e.printStackTrace();
+      }
+    } else {
+      Runtime runtime = Runtime.getRuntime();
+      try {
+        runtime.exec("rundll32 url.dll,FileProtocolHandler " + url);
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    }
 
 
-	}
-	
-    @Bean  
-    public SessionFactory sessionFactory(HibernateEntityManagerFactory hemf){  
-        return hemf.getSessionFactory();  
-    }  
-	
-	
-	
-	
+  }
+
+  @Bean
+  public SessionFactory sessionFactory(HibernateEntityManagerFactory hemf) {
+    return hemf.getSessionFactory();
+  }
+
+
+
 }

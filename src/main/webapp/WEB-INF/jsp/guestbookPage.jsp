@@ -18,7 +18,9 @@
 
 
 <link href="static/css/bootstrap.css" rel='stylesheet' type='text/css' />
-<link href="../static/css/bootstrap.css" rel='stylesheet' type='text/css' /> <!-- I do this because while on updateComment view, it looks on updateComment/static... and doesn't load the resourses. Couldn't find another solution, so I use this workaround -->
+<link href="../static/css/bootstrap.css" rel='stylesheet'
+	type='text/css' />
+<!-- I do this because while on updateComment view, it looks on updateComment/static... and doesn't load the resourses. Couldn't find another solution, so I use this workaround -->
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="static/js/jquery.min.js"></script>
@@ -32,7 +34,9 @@
 <!-- Custom Theme files -->
 
 <script type="application/x-javascript">
+	
 	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
+
 </script>
 <!-- animated-css -->
 <link href="static/css/animate.css" rel="stylesheet" type="text/css"
@@ -490,8 +494,8 @@
 	<div class="container">
 
 		</br>
-		
-		
+
+
 
 		<div class="head-section" id="guestbook">
 			<div class="container">
@@ -503,25 +507,27 @@
 
 
 		<c:if test="${!empty allComments}">
-			<table class = "table table-hover">
-			<tr>
-				<th width="120">Όνομα</th>
-				<th width="120">email</th>
-				<th width="120">Πόλη</th>
-				<th width="120">Σχόλια</th>
-				<th width="60">Επεξεργασία</th>
-				<th width="60">Διαγραφή</th>
-			</tr>
-			<c:forEach items="${allComments}" var="guestbook"> 
+			<table class="table table-hover">
 				<tr>
-					<td>${guestbook.nickname}</td>
-					<td>${guestbook.email}</td>
-					<td>${guestbook.city}</td>
-					<td>${guestbook.comments}</td>
-					<td><a href="<c:url value='/updateComment/${guestbook.id}' />" >Επεξεργασία</a></td>
-					<td><a href="<c:url value='/deleteComment/${guestbook.id}' />" >Διαγραφή</a></td>
+					<th width="120">Όνομα</th>
+					<th width="120">email</th>
+					<th width="120">Πόλη</th>
+					<th width="120">Σχόλια</th>
+					<th width="60">Επεξεργασία</th>
+					<th width="60">Διαγραφή</th>
 				</tr>
-			</c:forEach>
+				<c:forEach items="${allComments}" var="guestbook">
+					<tr>
+						<td>${guestbook.nickname}</td>
+						<td>${guestbook.email}</td>
+						<td>${guestbook.city}</td>
+						<td>${guestbook.comments}</td>
+						<td><a
+							href="<c:url value='/updateComment/${guestbook.id}' />">Επεξεργασία</a></td>
+						<td><a
+							href="<c:url value='/deleteComment/${guestbook.id}' />">Διαγραφή</a></td>
+					</tr>
+				</c:forEach>
 			</table>
 		</c:if>
 

@@ -4,17 +4,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.stefanosk27.NormanBatesMotel.Guestbook;
 import com.stefanosk27.NormanBatesMotel.GuestbookDAO;
-
 
 @Service("guestbookService")
 public class GuestbookService {
 
 	@Autowired
 	GuestbookDAO guestbookDao;
-//	GuestbookDAO guestbookDao = new GuestbookDAO(); 
 	
 	@Transactional
 	public List<Guestbook> getAllComments() {
@@ -34,7 +31,6 @@ public class GuestbookService {
 	@Transactional
 	public void updateComment(Guestbook guestbook) {
 		guestbookDao.updateComment(guestbook);
-
 	}
 
 	@Transactional
