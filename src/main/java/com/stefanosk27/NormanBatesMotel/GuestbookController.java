@@ -114,8 +114,23 @@ public class GuestbookController {
 		 model.addAttribute("guestbook", this.guestbookService.getComment(id));
 	        model.addAttribute("allComments", this.guestbookService.getAllComments());
 	        return "jsp/guestbookPage";
-//	        return new RedirectView("/addComment");
+//	        return "/getAllComments";
+//	        return model;
 	}
+	
+	
+	
+/*    @RequestMapping(value = "/editEmployee", method = RequestMethod.GET)
+    public ModelAndView editContact(HttpServletRequest request) {
+        int employeeId = Integer.parseInt(request.getParameter("id"));
+        Employee employee = employeeService.getEmployee(employeeId);
+        ModelAndView model = new ModelAndView("EmployeeForm");
+        model.addObject("employee", employee);
+ 
+        return model;
+    }*/
+  
+  
 
 	@RequestMapping(value = "/deleteComment/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
 	public RedirectView deleteComment(@PathVariable("id") int id) {
