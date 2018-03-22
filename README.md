@@ -1,7 +1,5 @@
 # Norman Bates Motel
 
-//TODO description, short
-
 "Norman Bates Motel" is an imaginary retro motel webpage where guests are encouraged to leave their comments on a Guestbook.
 
 It's a full stack web project, using Java, Spring Boot, Thymeleaf, HTML, Hibernate and SQL. 
