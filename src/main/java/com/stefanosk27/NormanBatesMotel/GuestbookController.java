@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.RedirectView;
 import com.stefanosk27.NormanBatesMotel.Guestbook;
@@ -43,13 +44,22 @@ public class GuestbookController {
 
   @RequestMapping(value = "/addComment", method = RequestMethod.POST,
       headers = "Accept=application/json")
-  public RedirectView addComment(@ModelAttribute("guestbook") Guestbook guestbook) {
+  public RedirectView addComment(@ModelAttribute("guestbook") Guestbook guestbook, RedirectAttributes attributes) {
     if (guestbook.getId() == 0) {
       guestbookService.addComment(guestbook);
     } else {
       guestbookService.updateComment(guestbook);
     }
-    return new RedirectView("/getAllComments");
+     
+    RedirectView rview = new RedirectView();
+    rview.setUrl("/getAllComments#guestbook");
+    
+    
+    return rview;
+//    attributes.addAttribute("guestbook"); //?string=guestbook#
+//    attributes.addAttribute("#guestbook", "#guestbook");
+//    return new RedirectView("/getAllComments#");
+    
 //    return new ModelAndView("redirect: http://localhost:8080/getAllComments#guestbook");
   }
 
@@ -65,7 +75,10 @@ public class GuestbookController {
       headers = "Accept=application/json")
   public RedirectView deleteComment(@PathVariable("id") int id) {
     guestbookService.deleteComment(id);
-    return new RedirectView("/getAllComments");
+    
+    RedirectView rview = new RedirectView();
+    rview.setUrl("/getAllComments#guestbook");
+    return rview;
 
   }
 }
