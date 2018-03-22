@@ -44,23 +44,16 @@ public class GuestbookController {
 
   @RequestMapping(value = "/addComment", method = RequestMethod.POST,
       headers = "Accept=application/json")
-  public RedirectView addComment(@ModelAttribute("guestbook") Guestbook guestbook, RedirectAttributes attributes) {
+  public RedirectView addComment(@ModelAttribute("guestbook") Guestbook guestbook) {
     if (guestbook.getId() == 0) {
       guestbookService.addComment(guestbook);
     } else {
       guestbookService.updateComment(guestbook);
     }
-     
+
     RedirectView rview = new RedirectView();
     rview.setUrl("/getAllComments#guestbook");
-    
-    
     return rview;
-//    attributes.addAttribute("guestbook"); //?string=guestbook#
-//    attributes.addAttribute("#guestbook", "#guestbook");
-//    return new RedirectView("/getAllComments#");
-    
-//    return new ModelAndView("redirect: http://localhost:8080/getAllComments#guestbook");
   }
 
   @RequestMapping(value = "/updateComment/{id}", method = RequestMethod.GET,
@@ -75,10 +68,14 @@ public class GuestbookController {
       headers = "Accept=application/json")
   public RedirectView deleteComment(@PathVariable("id") int id) {
     guestbookService.deleteComment(id);
-    
+
     RedirectView rview = new RedirectView();
-    rview.setUrl("/getAllComments#guestbook");
+    rview.setUrl("/getAllComments#guestbook"); // # appears on url, but page needs refresh to accept
+                                               // it. Still working on it.
     return rview;
 
   }
+
+
+
 }

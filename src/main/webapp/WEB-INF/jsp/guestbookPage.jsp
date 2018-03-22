@@ -525,7 +525,10 @@
 						<td><a
 							href="<c:url value='/updateComment/${guestbook.id}' />">Επεξεργασία</a></td>
 						<td><a
-							href="<c:url value='/deleteComment/${guestbook.id}' />">Διαγραφή</a></td>
+							href="<c:url value='/deleteComment/${guestbook.id}' />" >Διαγραφή</a></td>
+							
+																	
+							
 					</tr>
 				</c:forEach>
 			</table>
